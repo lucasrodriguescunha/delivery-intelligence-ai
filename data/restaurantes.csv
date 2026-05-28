@@ -1,0 +1,81 @@
+id_restaurante,nome_restaurante,tipo_culinaria,tempo_medio_preparo_minutos,avaliacao_media,cidade,bairro,faixa_preco
+1,Boteco Alice,Portuguesa,22,4.0,São Paulo,Pinheiros,$$
+2,Cantina da Família,Churrasco,38,4.9,Curitiba,Água Verde,$$
+3,Boteco Guilherme Moderno,Churrasco,33,4.0,Rio de Janeiro,Gávea,$
+4,Quiosque Matheus,Saudável,19,4.5,Porto Alegre,Mont Serrat,$$
+5,Pizza Clássico,Pizza,22,4.4,Rio de Janeiro,Tijuca,$$
+6,Rancho Alexandre Tradicional,Hambúrguer,12,3.9,São Paulo,Itaim Bibi,$
+7,Ísis Natural,Portuguesa,21,3.1,Belo Horizonte,Savassi,$$
+8,Mexicana Natural,Mexicana,11,3.8,São Paulo,Perdizes,$$$
+9,Portuguesa Gourmet,Portuguesa,14,4.3,Curitiba,Alto da XV,$
+10,Peruana Caseiro,Peruana,15,3.4,São Paulo,Moema,$
+11,Empório Rael,Pizza,32,4.0,Rio de Janeiro,Santa Teresa,$$
+12,João Pedro Caseiro,Frutos do Mar,30,3.4,Curitiba,Champagnat,$$$
+13,Rancho João Gabriel,Árabe,17,4.2,Belo Horizonte,Serra,$$$
+14,Empório da Família,Vegana,14,4.3,Rio de Janeiro,Ipanema,$$
+15,Thiago Natural,Árabe,16,4.0,Curitiba,Juvevê,$$$
+16,Japonesa Original,Japonesa,26,5.0,Rio de Janeiro,Flamengo,$$
+17,Restaurante Gourmet,Francesa,19,3.6,Curitiba,Mercês,$$
+18,Rancho da Família,Italiana,24,3.5,Curitiba,São Francisco,$$$
+19,Bruna Imperial,Churrasco,36,3.1,Rio de Janeiro,Tijuca,$
+20,Cantina Isadora,Frutos do Mar,23,4.2,Curitiba,Bigorrilho,$$$
+21,Vicente Artesanal,Vegana,23,4.2,Curitiba,Bigorrilho,$$$
+22,Brasileira Moderno,Brasileira,19,3.9,Rio de Janeiro,Barra da Tijuca,$$$$
+23,Frutos do Mar do Chef,Frutos do Mar,22,3.7,Curitiba,Champagnat,$$$$
+24,Quiosque Rebeca Especial,Árabe,17,4.6,Curitiba,Hauer,$
+25,Churrasco da Família,Churrasco,36,3.2,Curitiba,Batel,$$
+26,Pizzaria Maria Eduarda,Brasileira,21,3.9,Belo Horizonte,Santa Efigênia,$$
+27,Léo Especial,Vegana,16,4.4,Porto Alegre,Auxiliadora,$$
+28,Pizzaria Premium,Mexicana,25,4.6,Curitiba,Champagnat,$$
+29,Portuguesa do Chef,Portuguesa,15,3.9,Curitiba,Alto da XV,$$
+30,Saudável da Família,Saudável,13,4.6,Porto Alegre,Menino Deus,$
+31,Boteco Samuel,Frutos do Mar,27,4.0,São Paulo,Lapa,$$
+32,Rancho Beatriz,Italiana,14,3.5,São Paulo,Moema,$$$$
+33,Boteco Original,Mexicana,24,4.8,Curitiba,Alto da XV,$$$
+34,Lorena Clássico,Saudável,11,4.6,Curitiba,Hauer,$$
+35,Giovanna Premium,Italiana,21,3.8,Rio de Janeiro,Leblon,$$$
+36,Sushiplace Olívia,Chinesa,21,4.9,Porto Alegre,Moinhos de Vento,$$$
+37,Boteco Gourmet,Vegana,19,4.9,Porto Alegre,Três Figueiras,$$$
+38,Empório Caseiro,Japonesa,16,4.5,Curitiba,São Francisco,$$
+39,Churrascaria Rebeca,Vegana,20,4.0,São Paulo,Liberdade,$$$
+40,Rancho Gourmet,Italiana,20,3.1,Curitiba,Batel,$$$$
+41,Bar e Grill Natália,Saudável,10,4.3,Porto Alegre,Cidade Baixa,$$
+42,Pedro Miguel Natural,Brasileira,27,3.8,Rio de Janeiro,Tijuca,$$$$
+43,Benicio Original,Portuguesa,15,3.8,Belo Horizonte,Buritis,$$$$
+44,Cantina João Felipe Imperial,Mexicana,24,4.3,Rio de Janeiro,Botafogo,$$
+45,Lanchonete Eloah Original,Brasileira,17,4.4,São Paulo,Jardins,$
+46,Bistrô Marcos Vinicius da Família,Frutos do Mar,30,4.6,Rio de Janeiro,Ipanema,$
+47,Sabor de Imperial,Hambúrguer,11,3.9,São Paulo,Moema,$
+48,Bar e Grill Carlos Eduardo do Chef,Brasileira,18,3.4,Curitiba,Hauer,$$$
+49,Pizza do Chef,Pizza,26,4.2,Curitiba,Centro,$$$$
+50,Henry Artesanal,Hambúrguer,15,4.0,Rio de Janeiro,Flamengo,$
+51,Pizzaria Lorenzo,Brasileira,12,3.9,Belo Horizonte,Lourdes,$$
+52,Sabor de Arthur,Frutos do Mar,28,3.7,Curitiba,Alto da XV,$$
+53,Mexicana Original,Mexicana,19,4.3,Rio de Janeiro,Santa Teresa,$
+54,Churrascaria Ana Clara,Brasileira,29,4.2,Curitiba,Centro,$$$
+55,Tasca Original,Italiana,21,4.1,Rio de Janeiro,Flamengo,$$$
+56,Churrasco Gourmet,Churrasco,25,4.1,Belo Horizonte,Prado,$$
+57,Rancho Lorenzo,Mexicana,20,5.0,Curitiba,São Francisco,$$$$
+58,Brasileira Especial,Brasileira,19,4.3,Porto Alegre,Petrópolis,$
+59,Churrascaria Theodoro,Frutos do Mar,29,3.5,Rio de Janeiro,Barra da Tijuca,$$$
+60,Restaurante João Pedro Imperial,Frutos do Mar,35,4.5,São Paulo,Vila Madalena,$
+61,Restaurante Sophia,Japonesa,33,3.6,Rio de Janeiro,Tijuca,$
+62,Casa Juliana Tradicional,Chinesa,27,3.4,Belo Horizonte,Santa Efigênia,$$
+63,Sabor de Gourmet,Portuguesa,22,5.0,Porto Alegre,Rio Branco,$
+64,Maria Cecília Tradicional,Brasileira,15,3.8,Rio de Janeiro,Tijuca,$
+65,Casa Esther,Japonesa,30,3.8,Rio de Janeiro,Flamengo,$$$
+66,Árabe Tradicional,Árabe,12,4.1,Porto Alegre,Mont Serrat,$$$
+67,Brasileira Tradicional,Brasileira,14,4.3,Rio de Janeiro,Botafogo,$$$
+68,Bar e Grill Carlos Eduardo do Chef,Pizza,20,4.9,São Paulo,Consolação,$$$
+69,Empório Heitor Especial,Italiana,16,3.9,Belo Horizonte,Savassi,$$$
+70,Italiana Moderno,Italiana,24,3.5,Belo Horizonte,Savassi,$$
+71,Sabor de Imperial,Frutos do Mar,31,4.8,Porto Alegre,Rio Branco,$
+72,Churrascaria Sophie Natural,Portuguesa,11,4.2,Belo Horizonte,Savassi,$$
+73,Hambúrguer Natural,Hambúrguer,16,4.5,Rio de Janeiro,Santa Teresa,$
+74,Chinesa Natural,Chinesa,13,3.4,Curitiba,Juvevê,$$$
+75,Chinesa Moderno,Chinesa,22,4.2,Curitiba,Bigorrilho,$$
+76,Bar e Grill do Chef,Árabe,21,4.3,Curitiba,Champagnat,$$
+77,Mexicana do Norte,Mexicana,16,4.2,Curitiba,Hauer,$$
+78,Hambúrguer do Chef,Hambúrguer,16,3.7,Belo Horizonte,Santa Efigênia,$$$
+79,Churrascaria Caseiro,Saudável,21,4.3,Porto Alegre,Cidade Baixa,$$$
+80,Pizzaria Liam,Frutos do Mar,24,4.4,São Paulo,Consolação,$$$
