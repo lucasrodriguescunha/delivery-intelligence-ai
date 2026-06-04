@@ -1,0 +1,12 @@
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Banco vetorial (gerado pelo app)
+backend/app/chroma_db/
+
+# Modelo treinado (gerado via python modelo_atraso.py)
+backend/app/models/*.joblib
