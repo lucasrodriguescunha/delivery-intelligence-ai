@@ -10,9 +10,9 @@ df_restaurantes = pd.read_csv("../../data/restaurantes.csv")
 df_avaliacoes = pd.read_csv("../../data/avaliacoes.csv")
 
 
-print("Pedidos carregados:", len(df_pedidos), "linhas")
-print("Restaurantes carregados:", len(df_restaurantes), "linhas")
-print("Avaliações carregadas:", len(df_avaliacoes), "linhas")
+print(f"Pedidos carregados:      {len(df_pedidos):>5} linhas")
+print(f"Restaurantes carregados: {len(df_restaurantes):>5} linhas")
+print(f"Avaliações carregadas:   {len(df_avaliacoes):>5} linhas")
 
 
 print("\nMétricas gerais:\n")
@@ -63,6 +63,7 @@ quantidade_pedidos_por_dia = (
     .groupby("dia_semana")
     .size()
     .reindex(ordem_dias_semana)
+    .rename_axis(None)
 )
 
 print(quantidade_pedidos_por_dia.to_string())
@@ -119,16 +120,16 @@ quantidade_pedidos_por_dia.plot(
     edgecolor="white"
 )
 
-ax.set_title("Pedidos por Dia da Semana")
+ax.set_title("Pedidos por dia da semana")
 ax.set_xlabel("Dia")
-ax.set_ylabel("Quantidade de Pedidos")
+ax.set_ylabel("Quantidade de pedidos")
 ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha="right")
 
 plt.tight_layout()
 plt.savefig("graficos/pedidos_por_dia.png")
 plt.close()
 
-print("Gráfico salvo: graficos/pedidos_por_dia.png")
+print("\nGráfico de pedidos por dia da semana gerado e salvo em: graficos/pedidos_por_dia_da_semana.png")
 
 
 # Gráfico 2: percentual de pedidos atrasados por clima
@@ -146,7 +147,7 @@ percentual_atraso_por_clima.plot(
     edgecolor="white"
 )
 
-ax.set_title("% de Pedidos Atrasados por Clima")
+ax.set_title("% de Pedidos atrasados por clima")
 ax.set_xlabel("Clima")
 ax.set_ylabel("% Atrasados")
 ax.set_xticklabels(ax.get_xticklabels(), rotation=0)
@@ -155,70 +156,25 @@ plt.tight_layout()
 plt.savefig("graficos/atraso_por_clima.png")
 plt.close()
 
-print("Gráfico salvo: graficos/atraso_por_clima.png")
+print("\nGráfico de atraso por clima gerado e salvo em: graficos/atraso_por_clima.png")
 
 
-# Gráfico 3: quantidade de avaliações por nota
-fig, ax = plt.subplots(figsize=(6, 4))
+# Gráfico 3: top 5 restaurantes por nota média
+fig, ax = plt.subplots(figsize=(8, 4))
 
-quantidade_avaliacoes_por_nota = (
-    df_avaliacoes["nota"]
-    .value_counts()
-    .sort_index()
-)
-
-quantidade_avaliacoes_por_nota.plot(
-    kind="bar",
+top_5_restaurantes_por_nota.sort_values().plot(
+    kind="barh",
     ax=ax,
-    color="gold",
+    color="coral",
     edgecolor="white"
 )
 
-ax.set_title("Distribuição das Notas")
-ax.set_xlabel("Nota")
-ax.set_ylabel("Quantidade de Avaliações")
-ax.set_xticklabels(ax.get_xticklabels(), rotation=0)
+ax.set_title("Top 5 restaurantes por nota média")
+ax.set_xlabel("Nota média")
+ax.set_ylabel("Restaurante")
 
 plt.tight_layout()
-plt.savefig("graficos/distribuicao_notas.png")
+plt.savefig("graficos/top5_restaurantes.png")
 plt.close()
 
-print("Gráfico salvo: graficos/distribuicao_notas.png")
-
-
-# Gráfico 4: valor médio dos pedidos por tipo de culinária
-df_pedidos_com_culinaria = df_pedidos.merge(
-    df_restaurantes[["id_restaurante", "tipo_culinaria"]],
-    on="id_restaurante"
-)
-
-valor_medio_pedido_por_culinaria = (
-    df_pedidos_com_culinaria
-    .groupby("tipo_culinaria")["valor_pedido"]
-    .mean()
-    .sort_values(ascending=False)
-)
-
-fig, ax = plt.subplots(figsize=(9, 4))
-
-valor_medio_pedido_por_culinaria.plot(
-    kind="bar",
-    ax=ax,
-    color="mediumseagreen",
-    edgecolor="white"
-)
-
-ax.set_title("Ticket Médio por Tipo de Culinária")
-ax.set_xlabel("Tipo de Culinária")
-ax.set_ylabel("Valor Médio (R$)")
-ax.set_xticklabels(ax.get_xticklabels(), rotation=35, ha="right")
-
-plt.tight_layout()
-plt.savefig("graficos/ticket_por_culinaria.png")
-plt.close()
-
-print("Gráfico salvo: graficos/ticket_por_culinaria.png")
-
-
-print()
-print("Análise concluída!")
+print("\nGráfico de top 5 restaurantes gerado e salvo em: graficos/top5_restaurantes.png")
