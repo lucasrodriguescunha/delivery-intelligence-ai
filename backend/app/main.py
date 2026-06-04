@@ -3,9 +3,12 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 import chromadb
 from embeddings import criar_colecao, criar_funcao_embedding, buscar, popular_colecao, carregar_avaliacoes
@@ -164,6 +167,10 @@ def buscar_avaliacoes(request: BuscarAvaliacoesRequest):
 
 @app.post("/insights")
 def gerar_insights(request: InsightsRequest):
+    import os
+    if not os.environ.get("OPENAI_API_KEY"):
+        raise HTTPException(status_code=503, detail="OPENAI_API_KEY não configurada")
+
     colecao = estado.get("colecao")
     df_pedidos = estado.get("df_pedidos")
     df_avaliacoes = estado.get("df_avaliacoes")
