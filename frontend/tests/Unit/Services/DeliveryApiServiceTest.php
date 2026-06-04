@@ -113,8 +113,8 @@ test('buscarAvaliacoes throws on HTTP error', function () {
 
 // --- insights ---
 
-test('insights sends POST and returns response body as string', function () {
-    Http::fake(['test-api:8000/insights' => Http::response('Insights gerados: alta taxa de atraso')]);
+test('insights sends POST and returns texto field from JSON response', function () {
+    Http::fake(['test-api:8000/insights' => Http::response(['texto' => 'Insights gerados: alta taxa de atraso'])]);
 
     $result = (new DeliveryApiService())->insights('atraso', 10);
 
@@ -128,7 +128,7 @@ test('insights sends POST and returns response body as string', function () {
 });
 
 test('insights uses default parameters', function () {
-    Http::fake(['test-api:8000/insights' => Http::response('ok')]);
+    Http::fake(['test-api:8000/insights' => Http::response(['texto' => 'ok'])]);
 
     (new DeliveryApiService())->insights();
 

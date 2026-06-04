@@ -37,7 +37,7 @@ test('gerar fails when query is too short', function () {
 });
 
 test('gerar passes validation when query has 3+ chars', function () {
-    Http::fake(['test-api:8000/insights' => Http::response('ok')]);
+    Http::fake(['test-api:8000/insights' => Http::response(['texto' => 'ok'])]);
 
     Livewire::test(Insights::class)
         ->set('query', 'abc')
@@ -63,7 +63,7 @@ test('gerar fails when n_reviews exceeds 20', function () {
 
 test('gerar stores texto from API response', function () {
     $insight = 'Taxa de atraso de 18%. Principais causas: chuva e hora de pico.';
-    Http::fake(['test-api:8000/insights' => Http::response($insight)]);
+    Http::fake(['test-api:8000/insights' => Http::response(['texto' => $insight])]);
 
     Livewire::test(Insights::class)
         ->set('query', 'atraso chuva')
@@ -75,7 +75,7 @@ test('gerar stores texto from API response', function () {
 });
 
 test('gerar sends correct payload to API', function () {
-    Http::fake(['test-api:8000/insights' => Http::response('resultado')]);
+    Http::fake(['test-api:8000/insights' => Http::response(['texto' => 'resultado'])]);
 
     Livewire::test(Insights::class)
         ->set('query', 'qualidade entrega')
@@ -90,7 +90,7 @@ test('gerar sends correct payload to API', function () {
 });
 
 test('carregando resets to false after successful gerar', function () {
-    Http::fake(['test-api:8000/insights' => Http::response('ok')]);
+    Http::fake(['test-api:8000/insights' => Http::response(['texto' => 'ok'])]);
 
     Livewire::test(Insights::class)
         ->set('query', 'atraso')
