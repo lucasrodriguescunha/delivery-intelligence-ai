@@ -146,15 +146,22 @@ delivery-intelligence-ai/
 │   └── restaurantes.csv      # Cadastro de restaurantes
 ├── backend/
 │   ├── requirements.txt
-│   └── app/
-│       ├── main.py           # API FastAPI
-│       ├── analise.py        # Análise exploratória e gráficos
-│       ├── modelo_atraso.py  # Treinamento do classificador ML
-│       ├── embeddings.py     # ChromaDB + busca semântica
-│       ├── insights.py       # Geração de insights via GPT-4o
-│       ├── Dockerfile
-│       └── models/
-│           └── modelo_atraso.joblib
+│   ├── pytest.ini
+│   ├── app/
+│   │   ├── main.py           # API FastAPI
+│   │   ├── analise.py        # Análise exploratória e gráficos
+│   │   ├── modelo_atraso.py  # Treinamento do classificador ML
+│   │   ├── embeddings.py     # ChromaDB + busca semântica
+│   │   ├── insights.py       # Geração de insights via GPT-4o
+│   │   ├── Dockerfile
+│   │   └── models/
+│   │       └── modelo_atraso.joblib
+│   └── tests/
+│       ├── conftest.py
+│       ├── test_api.py
+│       ├── test_embeddings.py
+│       ├── test_metricas.py
+│       └── test_modelo_atraso.py
 ├── frontend/
 │   ├── app/
 │   │   ├── Livewire/         # Componentes reativos
@@ -163,11 +170,12 @@ delivery-intelligence-ai/
 │       ├── dashboard.blade.php
 │       └── pages/delivery/   # prever-atraso, buscar-avaliacoes, insights
 └── docs/
-    ├── Modelo_de_Atraso.md
-    ├── Embeddings.md
-    ├── LLM_Insights.md
+    ├── ANALISE_EXPLORATORIA.md
+    ├── MODELO_DE_ATRASO.md
+    ├── EMBEDDINGS.md
+    ├── LLM_INSIGHTS.md
     ├── ROTAS.md
-    └── ANALISE_EXPLORATORIA.md
+    └── FRONTEND.md
 ```
 
 ## Stack
@@ -225,7 +233,7 @@ docker run -p 8000:8000 -e OPENAI_API_KEY="sk-..." delivery-intelligence-ai
 ## Testes
 
 ```bash
-cd backend/app && pytest
+cd backend && pytest
 ```
 
 ## Documentação
@@ -233,8 +241,8 @@ cd backend/app && pytest
 | Módulo | Documento |
 |---|---|
 | Análise exploratória | [docs/ANALISE_EXPLORATORIA.md](docs/ANALISE_EXPLORATORIA.md) |
-| Modelo de previsão de atraso | [docs/Modelo_de_Atraso.md](docs/Modelo_de_Atraso.md) |
-| Busca semântica / embeddings | [docs/Embeddings.md](docs/Embeddings.md) |
-| Geração de insights com LLM | [docs/LLM_Insights.md](docs/LLM_Insights.md) |
+| Modelo de previsão de atraso | [docs/MODELO_DE_ATRASO.md](docs/MODELO_DE_ATRASO.md) |
+| Busca semântica / embeddings | [docs/EMBEDDINGS.md](docs/EMBEDDINGS.md) |
+| Geração de insights com LLM | [docs/LLM_INSIGHTS.md](docs/LLM_INSIGHTS.md) |
 | Rotas da API | [docs/ROTAS.md](docs/ROTAS.md) |
 | Frontend Laravel | [docs/FRONTEND.md](docs/FRONTEND.md) |

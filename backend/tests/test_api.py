@@ -1,3 +1,4 @@
+import sys
 from contextlib import asynccontextmanager
 from unittest.mock import MagicMock, patch
 
@@ -5,7 +6,10 @@ import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
-# Stub módulos pesados antes de importar main
+# Stub módulos pesados antes de importar main.
+# patch.dict remove "main" de sys.modules ao sair do contexto (não estava lá antes),
+# então patch("main.buscar") reimportaria um módulo diferente sem os stubs.
+# Registrar manualmente mantém a referência correta.
 with patch.dict(
     "sys.modules",
     {
@@ -15,7 +19,11 @@ with patch.dict(
         "insights": MagicMock(),
     },
 ):
-    from main import app, estado
+    import main as _main_mod
+
+sys.modules["main"] = _main_mod
+app = _main_mod.app
+estado = _main_mod.estado
 
 
 # Substitui lifespan real por noop — testes controlam estado manualmente
@@ -25,6 +33,18 @@ async def _lifespan_noop(app):
 
 
 app.router.lifespan_context = _lifespan_noop
+
+
+METRICAS_KEYS = {
+    "ticket_medio_R$",
+    "total_pedidos",
+    "pedidos_atrasados",
+    "percentual_atraso_%",
+    "tempo_medio_entrega_min",
+    "nota_media_geral",
+    "clima_maior_atraso",
+    "dia_maior_volume",
+}
 
 
 # --- Fixtures ---
@@ -83,6 +103,43 @@ def client(pipeline_mock, df_pedidos, df_avaliacoes):
     with TestClient(app) as c:
         yield c
     estado.clear()
+
+
+# --- /metricas ---
+
+def test_metricas_retorna_200(client):
+    assert client.get("/metricas").status_code == 200
+
+
+def test_metricas_contem_todas_as_chaves(client):
+    data = client.get("/metricas").json()
+    assert METRICAS_KEYS == set(data.keys())
+
+
+def test_metricas_total_pedidos(client):
+    assert client.get("/metricas").json()["total_pedidos"] == 2
+
+
+def test_metricas_pedidos_atrasados(client):
+    assert client.get("/metricas").json()["pedidos_atrasados"] == 1
+
+
+def test_metricas_percentual_atraso(client):
+    assert client.get("/metricas").json()["percentual_atraso_%"] == pytest.approx(50.0)
+
+
+def test_metricas_ticket_medio(client):
+    assert client.get("/metricas").json()["ticket_medio_R$"] == pytest.approx(40.0)
+
+
+def test_metricas_nota_media(client):
+    assert client.get("/metricas").json()["nota_media_geral"] == pytest.approx(4.5)
+
+
+def test_metricas_sem_dados_retorna_503():
+    estado.clear()
+    with TestClient(app) as c:
+        assert c.get("/metricas").status_code == 503
 
 
 # --- /health ---
@@ -157,8 +214,7 @@ def test_buscar_avaliacoes_sem_chroma_retorna_503():
 
 
 def test_buscar_avaliacoes_repassa_filtro_nota(client):
-    mock_buscar = MagicMock(return_value=[])
-    with patch("main.buscar", mock_buscar):
+    with patch("main.buscar", return_value=[]) as mock_buscar:
         resp = client.post(
             "/buscar-avaliacoes",
             json={"query": "bom", "filtro_nota_minima": 4.0},
@@ -170,7 +226,7 @@ def test_buscar_avaliacoes_repassa_filtro_nota(client):
 
 # --- /insights ---
 
-async def _gen_fake():
+def _gen_fake():
     yield "insight gerado"
 
 
