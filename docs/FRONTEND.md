@@ -106,7 +106,7 @@ $api->insights($query, $nReviews);           // POST /insights
 
 ## Testes
 
-Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **103 testes**.
+Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **105 testes**.
 
 ```bash
 cd frontend && php artisan test
@@ -123,7 +123,7 @@ tests/
 ├── Feature/
 │   ├── Livewire/
 │   │   ├── DashboardTest.php            #  8 testes — mount, erro API, auth
-│   │   ├── BuscarAvaliacoesTest.php     # 15 testes — validação, busca, filtros
+│   │   ├── BuscarAvaliacoesTest.php     # 17 testes — validação, busca, filtros, paginação
 │   │   ├── PreverAtrasoTest.php         # 16 testes — validação de 8 campos, predição
 │   │   └── InsightsTest.php            # 12 testes — validação, geração, erros
 │   ├── Auth/                            # Testes de autenticação (Fortify)
