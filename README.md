@@ -46,11 +46,11 @@ Este projeto foi construído fase a fase, do dado bruto até a interface web. Ca
 - Visualizações com Matplotlib (histogramas, barras, heatmap de correlação)
 - Testes unitários das funções de métricas com pytest
 
-**Arquivos:** `backend/app/analise.py` · `data/`
+**Arquivos:** `backend/app/services/analise.py` · `data/`
 
 ```bash
 cd backend/app
-python analise.py   # gera gráficos em backend/app/graficos/
+python services/analise.py   # gera gráficos em backend/app/graficos/
 ```
 
 ---
@@ -66,11 +66,11 @@ python analise.py   # gera gráficos em backend/app/graficos/
 - Avaliação com classification report, AUC-ROC e matriz de confusão
 - Serialização do modelo treinado com joblib
 
-**Arquivos:** `backend/app/modelo_atraso.py` · `docs/Modelo_de_Atraso.md`
+**Arquivos:** `backend/app/ml/modelo_atraso.py` · `docs/MODELO_DE_ATRASO.md`
 
 ```bash
 cd backend/app
-python modelo_atraso.py   # treina e salva em models/modelo_atraso.joblib
+python ml/modelo_atraso.py   # treina e salva em ml/modelo_atraso.joblib
 ```
 
 ---
@@ -86,7 +86,7 @@ python modelo_atraso.py   # treina e salva em models/modelo_atraso.joblib
 - Busca por similaridade de cosseno com filtro opcional de nota mínima
 - Retorno de comentário, restaurante, nota e score de similaridade
 
-**Arquivos:** `backend/app/embeddings.py` · `docs/Embeddings.md`
+**Arquivos:** `backend/app/rag/embeddings.py` · `docs/EMBEDDINGS.md`
 
 ---
 
@@ -101,7 +101,7 @@ python modelo_atraso.py   # treina e salva em models/modelo_atraso.joblib
 - Saída estruturada em três seções: **Diagnóstico**, **Recomendações**, **Alertas**
 - Prompt de sistema com persona de analista operacional
 
-**Arquivos:** `backend/app/insights.py` · `docs/LLM_Insights.md`
+**Arquivos:** `backend/app/services/insights.py` · `docs/LLM_INSIGHTS.md`
 
 ---
 
@@ -125,7 +125,7 @@ python modelo_atraso.py   # treina e salva em models/modelo_atraso.joblib
 - Interface de busca semântica com filtro de nota
 - Gerador de insights com query customizável
 
-**Arquivos:** `backend/app/main.py` · `frontend/` · `docs/ROTAS.md`
+**Arquivos:** `backend/app/main.py` · `backend/app/api/routes.py` · `frontend/` · `docs/ROTAS.md`
 
 ```bash
 # FastAPI
@@ -150,14 +150,24 @@ delivery-intelligence-ai/
 │   ├── pytest.ini
 │   ├── .env.example          # Variáveis de ambiente (copiar para .env)
 │   ├── app/
-│   │   ├── main.py           # API FastAPI
-│   │   ├── analise.py        # Análise exploratória e gráficos
-│   │   ├── modelo_atraso.py  # Treinamento do classificador ML
-│   │   ├── embeddings.py     # ChromaDB + busca semântica
-│   │   ├── insights.py       # Geração de insights via GPT-4o
+│   │   ├── main.py           # App FastAPI: setup, lifespan, middleware
+│   │   ├── state.py          # Estado compartilhado em runtime
 │   │   ├── Dockerfile
-│   │   └── models/
-│   │       └── modelo_atraso.joblib
+│   │   ├── api/
+│   │   │   └── routes.py     # Endpoints da API
+│   │   ├── ml/
+│   │   │   ├── modelo_atraso.py       # Treinamento do classificador ML
+│   │   │   └── modelo_atraso.joblib   # Modelo serializado
+│   │   ├── models/
+│   │   │   └── schemas.py    # Schemas Pydantic (request/response)
+│   │   ├── rag/
+│   │   │   └── embeddings.py # ChromaDB + busca semântica
+│   │   ├── services/
+│   │   │   ├── analise.py    # Análise exploratória e gráficos
+│   │   │   ├── insights.py   # Geração de insights via GPT-4o
+│   │   │   └── metricas.py   # calcular_metricas() + feature constants
+│   │   ├── graficos/         # PNGs gerados pelo analise.py
+│   │   └── chroma_db/        # Banco vetorial persistente
 │   └── tests/
 │       ├── conftest.py
 │       ├── test_api.py
@@ -207,7 +217,7 @@ delivery-intelligence-ai/
 pip install -r backend/requirements.txt
 
 # 2. Treinar o modelo
-cd backend/app && python modelo_atraso.py
+cd backend/app && python ml/modelo_atraso.py
 
 # 3. Dependências Laravel
 cd frontend && composer install && npm install && cp .env.example .env

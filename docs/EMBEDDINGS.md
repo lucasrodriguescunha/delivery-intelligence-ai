@@ -4,7 +4,7 @@ Módulo de busca semântica sobre avaliações de clientes usando ChromaDB e emb
 
 ## Arquivo
 
-`backend/app/embeddings.py`
+`backend/app/rag/embeddings.py`
 
 ## Como funciona
 
@@ -37,7 +37,7 @@ Avaliações de clientes são convertidas em vetores numéricos (embeddings) e a
 
 ```bash
 cd backend/app
-python embeddings.py
+python rag/embeddings.py
 ```
 
 Indexa todas as avaliações com comentário não nulo. Execuções subsequentes ignoram documentos já existentes (idempotente).
@@ -52,7 +52,7 @@ Seguido de 3 buscas demo no terminal.
 ## Como buscar via código
 
 ```python
-from embeddings import inicializar, buscar
+from rag.embeddings import inicializar, buscar
 
 _, colecao = inicializar()
 

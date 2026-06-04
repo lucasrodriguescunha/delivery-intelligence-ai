@@ -4,7 +4,7 @@ Módulo de machine learning que treina e serve um classificador binário para pr
 
 ## Arquivo
 
-`backend/app/modelo_atraso.py`
+`backend/app/ml/modelo_atraso.py`
 
 ## Como funciona
 
@@ -34,21 +34,21 @@ pedidos.csv
     └── StandardScaler (features numéricas)
     └── OneHotEncoder (features categóricas)
         └── LogisticRegression(max_iter=1000, random_state=42)
-            └── models/modelo_atraso.joblib
+            └── ml/modelo_atraso.joblib
 ```
 
 ## Como treinar
 
 ```bash
 cd backend/app
-python modelo_atraso.py
+python ml/modelo_atraso.py
 ```
 
 Saída esperada:
 - Relatório de classificação no terminal
 - AUC-ROC score
 - Imagem `graficos/matriz_confusao.png`
-- Arquivo `models/modelo_atraso.joblib`
+- Arquivo `ml/modelo_atraso.joblib`
 
 ## Como avaliar
 

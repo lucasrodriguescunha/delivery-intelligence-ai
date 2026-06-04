@@ -36,7 +36,10 @@ Retorna métricas operacionais agregadas dos dados de pedidos e avaliações.
   "tempo_medio_entrega_min": 43.6,
   "nota_media_geral": 3.82,
   "clima_maior_atraso": "Chuva",
-  "dia_maior_volume": "Sexta"
+  "dia_maior_volume": "Sexta",
+  "pedidos_por_dia": {"Segunda": 120, "Sexta": 210, "Sábado": 180},
+  "atraso_por_clima": {"Chuva": 45.2, "Ensolarado": 18.1, "Nublado": 22.3},
+  "tempo_por_dia": {"Segunda": 38.5, "Sexta": 51.2, "Sábado": 48.0}
 }
 ```
 
@@ -91,7 +94,7 @@ Prevê se um pedido será entregue com atraso usando o modelo de Regressão Log�
 
 | Status | Motivo |
 |---|---|
-| `503` | Modelo não carregado (falta `models/modelo_atraso.joblib`) |
+| `503` | Modelo não carregado (falta `ml/modelo_atraso.joblib`) |
 
 ---
 

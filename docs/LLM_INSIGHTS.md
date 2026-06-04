@@ -4,7 +4,7 @@ Módulo de geração de insights operacionais via OpenAI GPT-4o com streaming de
 
 ## Arquivo
 
-`backend/app/insights.py`
+`backend/app/services/insights.py`
 
 ## Como funciona
 
@@ -30,7 +30,7 @@ O system prompt instrui o modelo a agir como analista sênior de operações de 
 
 ### Métricas enviadas ao modelo
 
-Calculadas em `main.py::calcular_metricas()`:
+Calculadas em `services/metricas.py::calcular_metricas()`:
 
 | Métrica | Descrição |
 |---|---|
@@ -42,6 +42,9 @@ Calculadas em `main.py::calcular_metricas()`:
 | `nota_media_geral` | Média das notas dos clientes |
 | `clima_maior_atraso` | Clima com maior taxa de atraso |
 | `dia_maior_volume` | Dia da semana com mais pedidos |
+| `pedidos_por_dia` | Volume de pedidos por dia da semana |
+| `atraso_por_clima` | % de atraso por condição climática |
+| `tempo_por_dia` | Tempo médio de entrega por dia da semana |
 
 ## Configuração
 
@@ -58,7 +61,7 @@ export OPENAI_API_KEY="sk-..."
 
 Se a chave não estiver configurada, o endpoint `/insights` retorna **503** com mensagem `OPENAI_API_KEY não configurada`.
 
-Modelo configurável em `insights.py`:
+Modelo configurável em `services/insights.py`:
 
 ```python
 MODELO = "gpt-4o"  # Troque por gpt-4-turbo, gpt-4.1, etc.
@@ -67,7 +70,7 @@ MODELO = "gpt-4o"  # Troque por gpt-4-turbo, gpt-4.1, etc.
 ## Como testar isoladamente
 
 ```python
-from insights import gerar_insights_stream
+from services.insights import gerar_insights_stream
 
 metricas = {
     "ticket_medio_R$": 45.50,

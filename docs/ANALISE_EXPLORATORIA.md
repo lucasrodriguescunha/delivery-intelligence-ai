@@ -4,7 +4,7 @@ Script de análise e visualização dos dados operacionais de delivery.
 
 ## Arquivo
 
-`backend/app/analise.py`
+`backend/app/services/analise.py`
 
 ## O que faz
 
@@ -34,7 +34,7 @@ Carrega os três CSVs de dados, calcula métricas gerais e gera três gráficos 
 
 ```bash
 cd backend/app
-python analise.py
+python services/analise.py
 ```
 
 ## Dados necessários
