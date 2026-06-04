@@ -38,7 +38,6 @@ def carregar_avaliacoes(
         how="left",
     )
 
-    # Remove avaliações sem comentário
     df = df.dropna(subset=["comentario"])
     df = df[df["comentario"].str.strip() != ""]
 
@@ -51,7 +50,6 @@ def popular_colecao(
 ) -> None:
     ids = df["id_avaliacao"].astype(str).tolist()
 
-    # Evita reinserir documentos já existentes
     existentes = set(colecao.get(ids=ids)["ids"])
     df_novos = df[~df["id_avaliacao"].astype(str).isin(existentes)]
 
@@ -84,7 +82,6 @@ def buscar(
 ) -> list[dict]:
     where = {"nota": {"$gte": filtro_nota_minima}} if filtro_nota_minima else None
 
-    # Busca mais resultados para compensar duplicatas de texto
     n_fetch = min(n_resultados * 20, colecao.count())
 
     resultado = colecao.query(

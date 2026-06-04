@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 import joblib
 import pandas as pd
@@ -14,6 +14,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
+
+_BASE = Path(__file__).parent
+_DATA = _BASE.parent.parent.parent / "data"
+_GRAFICOS = _BASE.parent / "graficos"
 
 FEATURES_NUMERICAS = [
     "valor_pedido",
@@ -31,10 +35,11 @@ FEATURES_CATEGORICAS = [
 
 TARGET = "atrasado"
 
-CAMINHO_MODELO = "models/modelo_atraso.joblib"
+CAMINHO_MODELO = str(_BASE / "modelo_atraso.joblib")
 
 
-def carregar_dados(caminho_csv: str) -> pd.DataFrame:
+def carregar_dados(caminho_csv: str | None = None) -> pd.DataFrame:
+    caminho_csv = caminho_csv or str(_DATA / "pedidos.csv")
     df = pd.read_csv(caminho_csv)
     colunas_necessarias = FEATURES_NUMERICAS + FEATURES_CATEGORICAS + [TARGET]
     return df[colunas_necessarias]
@@ -70,7 +75,7 @@ def avaliar_modelo(pipeline: Pipeline, X_test: pd.DataFrame, y_test: pd.Series) 
     auc = roc_auc_score(y_test, y_proba)
     print(f"AUC-ROC: {auc:.4f}")
 
-    os.makedirs("graficos", exist_ok=True)
+    _GRAFICOS.mkdir(parents=True, exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(5, 4))
     ConfusionMatrixDisplay.from_estimator(
@@ -83,19 +88,18 @@ def avaliar_modelo(pipeline: Pipeline, X_test: pd.DataFrame, y_test: pd.Series) 
     )
     ax.set_title("Matriz de confusão — Modelo de atraso")
     plt.tight_layout()
-    plt.savefig("graficos/matriz_confusao.png")
+    plt.savefig(_GRAFICOS / "matriz_confusao.png")
     plt.close()
 
-    print("\nMatriz de confusão salva em: graficos/matriz_confusao.png")
+    print(f"\nMatriz de confusão salva em: {_GRAFICOS / 'matriz_confusao.png'}")
 
 
 def salvar_modelo(pipeline: Pipeline) -> None:
-    os.makedirs(os.path.dirname(CAMINHO_MODELO), exist_ok=True)
     joblib.dump(pipeline, CAMINHO_MODELO)
     print(f"\nModelo salvo em: {CAMINHO_MODELO}")
 
 
-def treinar(caminho_csv: str = "../../data/pedidos.csv") -> Pipeline:
+def treinar(caminho_csv: str | None = None) -> Pipeline:
     df = carregar_dados(caminho_csv)
 
     X = df[FEATURES_NUMERICAS + FEATURES_CATEGORICAS]
