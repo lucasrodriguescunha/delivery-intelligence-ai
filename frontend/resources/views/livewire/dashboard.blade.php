@@ -59,45 +59,70 @@
             {{-- Pedidos por dia da semana --}}
             <flux:card class="flex flex-col gap-4">
                 <flux:heading size="sm">Pedidos por dia da semana</flux:heading>
-                <flux:chart :value="$pedidosPorDia" class="aspect-2/1">
-                    <flux:chart.svg gutter="4 0 16 32">
-                        <flux:chart.bar field="pedidos" class="text-violet-500 dark:text-violet-400" radius="2" />
-                        <flux:chart.axis axis="x" field="dia" scale="categorical">
-                            <flux:chart.axis.tick class="text-zinc-400 dark:text-zinc-500" />
-                        </flux:chart.axis>
-                        <flux:chart.axis axis="y">
-                            <flux:chart.axis.grid class="text-zinc-100 dark:text-zinc-700" />
-                            <flux:chart.axis.tick class="text-zinc-400 dark:text-zinc-500" />
-                        </flux:chart.axis>
-                        <flux:chart.cursor />
-                        <flux:chart.tooltip>
-                            <flux:chart.tooltip.heading field="dia" />
-                            <flux:chart.tooltip.value field="pedidos" label="Pedidos" />
-                        </flux:chart.tooltip>
-                    </flux:chart.svg>
-                </flux:chart>
+                <div
+                    x-data="{
+                        init() {
+                            const data = @js($pedidosPorDia);
+                            new Chart(this.$refs.canvas, {
+                                type: 'bar',
+                                data: {
+                                    labels: data.map(d => d.dia),
+                                    datasets: [{
+                                        data: data.map(d => d.pedidos),
+                                        backgroundColor: 'rgb(139,92,246)',
+                                        borderRadius: 4,
+                                    }]
+                                },
+                                options: {
+                                    plugins: { legend: { display: false } },
+                                    scales: {
+                                        x: { grid: { display: false } },
+                                        y: { grid: { color: 'rgba(0,0,0,0.06)' } }
+                                    }
+                                }
+                            });
+                        }
+                    }"
+                    class="relative aspect-video"
+                >
+                    <canvas x-ref="canvas"></canvas>
+                </div>
             </flux:card>
 
             {{-- % Atraso por clima --}}
             <flux:card class="flex flex-col gap-4">
                 <flux:heading size="sm">% Atraso por condição climática</flux:heading>
-                <flux:chart :value="$atrasoPorClima" class="aspect-2/1">
-                    <flux:chart.svg gutter="4 0 16 32">
-                        <flux:chart.bar field="percentual" class="text-red-500 dark:text-red-400" radius="2" />
-                        <flux:chart.axis axis="x" field="clima" scale="categorical">
-                            <flux:chart.axis.tick class="text-zinc-400 dark:text-zinc-500" />
-                        </flux:chart.axis>
-                        <flux:chart.axis axis="y" tick-suffix="%">
-                            <flux:chart.axis.grid class="text-zinc-100 dark:text-zinc-700" />
-                            <flux:chart.axis.tick class="text-zinc-400 dark:text-zinc-500" />
-                        </flux:chart.axis>
-                        <flux:chart.cursor />
-                        <flux:chart.tooltip>
-                            <flux:chart.tooltip.heading field="clima" />
-                            <flux:chart.tooltip.value field="percentual" label="% Atraso" :format="['style' => 'unit', 'unit' => 'percent', 'maximumFractionDigits' => 1]" />
-                        </flux:chart.tooltip>
-                    </flux:chart.svg>
-                </flux:chart>
+                <div
+                    x-data="{
+                        init() {
+                            const data = @js($atrasoPorClima);
+                            new Chart(this.$refs.canvas, {
+                                type: 'bar',
+                                data: {
+                                    labels: data.map(d => d.clima),
+                                    datasets: [{
+                                        data: data.map(d => d.percentual),
+                                        backgroundColor: 'rgb(239,68,68)',
+                                        borderRadius: 4,
+                                    }]
+                                },
+                                options: {
+                                    plugins: { legend: { display: false } },
+                                    scales: {
+                                        x: { grid: { display: false } },
+                                        y: {
+                                            grid: { color: 'rgba(0,0,0,0.06)' },
+                                            ticks: { callback: v => v + '%' }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }"
+                    class="relative aspect-video"
+                >
+                    <canvas x-ref="canvas"></canvas>
+                </div>
             </flux:card>
         </div>
 
@@ -105,25 +130,40 @@
         <div class="mt-6">
             <flux:card class="flex flex-col gap-4">
                 <flux:heading size="sm">Tempo médio de entrega por dia (min)</flux:heading>
-                <flux:chart :value="$tempoPorDia" class="aspect-4/1">
-                    <flux:chart.svg gutter="4 0 16 40">
-                        <flux:chart.line field="minutos" class="text-amber-500 dark:text-amber-400" curve="smooth" />
-                        <flux:chart.area field="minutos" class="text-amber-500/10 dark:text-amber-400/10" curve="smooth" />
-                        <flux:chart.point field="minutos" class="text-amber-500 dark:text-amber-400" />
-                        <flux:chart.axis axis="x" field="dia" scale="categorical">
-                            <flux:chart.axis.tick class="text-zinc-400 dark:text-zinc-500" />
-                        </flux:chart.axis>
-                        <flux:chart.axis axis="y" tick-suffix=" min">
-                            <flux:chart.axis.grid class="text-zinc-100 dark:text-zinc-700" />
-                            <flux:chart.axis.tick class="text-zinc-400 dark:text-zinc-500" />
-                        </flux:chart.axis>
-                        <flux:chart.cursor />
-                        <flux:chart.tooltip>
-                            <flux:chart.tooltip.heading field="dia" />
-                            <flux:chart.tooltip.value field="minutos" label="Tempo médio" />
-                        </flux:chart.tooltip>
-                    </flux:chart.svg>
-                </flux:chart>
+                <div
+                    x-data="{
+                        init() {
+                            const data = @js($tempoPorDia);
+                            new Chart(this.$refs.canvas, {
+                                type: 'line',
+                                data: {
+                                    labels: data.map(d => d.dia),
+                                    datasets: [{
+                                        data: data.map(d => d.minutos),
+                                        borderColor: 'rgb(245,158,11)',
+                                        backgroundColor: 'rgba(245,158,11,0.1)',
+                                        fill: true,
+                                        tension: 0.4,
+                                        pointBackgroundColor: 'rgb(245,158,11)',
+                                    }]
+                                },
+                                options: {
+                                    plugins: { legend: { display: false } },
+                                    scales: {
+                                        x: { grid: { display: false } },
+                                        y: {
+                                            grid: { color: 'rgba(0,0,0,0.06)' },
+                                            ticks: { callback: v => v + ' min' }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }"
+                    class="relative"
+                >
+                    <canvas x-ref="canvas"></canvas>
+                </div>
             </flux:card>
         </div>
     @endif
