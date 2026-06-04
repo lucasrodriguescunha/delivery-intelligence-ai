@@ -36,6 +36,33 @@ class PreverAtraso extends Component
     public ?string $erro = null;
     public bool $carregando = false;
 
+    protected function messages(): array
+    {
+        return [
+            'valor_pedido.required'           => 'Informe o valor do pedido.',
+            'valor_pedido.numeric'            => 'O valor deve ser um número.',
+            'valor_pedido.min'                => 'O valor do pedido não pode ser negativo.',
+            'quantidade_itens.required'       => 'Informe a quantidade de itens.',
+            'quantidade_itens.integer'        => 'A quantidade deve ser um número inteiro.',
+            'quantidade_itens.min'            => 'O pedido deve ter pelo menos 1 item.',
+            'tempo_preparo_minutos.required'  => 'Informe o tempo de preparo.',
+            'tempo_preparo_minutos.numeric'   => 'O tempo de preparo deve ser um número.',
+            'tempo_preparo_minutos.min'       => 'O tempo de preparo não pode ser negativo.',
+            'tempo_estimado_minutos.required' => 'Informe o tempo estimado de entrega.',
+            'tempo_estimado_minutos.numeric'  => 'O tempo estimado deve ser um número.',
+            'tempo_estimado_minutos.min'      => 'O tempo estimado não pode ser negativo.',
+            'distancia_km.required'           => 'Informe a distância.',
+            'distancia_km.numeric'            => 'A distância deve ser um número.',
+            'distancia_km.min'                => 'A distância não pode ser negativa.',
+            'hora.required'                   => 'Informe a hora do pedido.',
+            'hora.integer'                    => 'A hora deve ser um número inteiro.',
+            'hora.min'                        => 'A hora deve ser entre 0 e 23.',
+            'hora.max'                        => 'A hora deve ser entre 0 e 23.',
+            'clima.required'                  => 'Selecione o clima.',
+            'dia_semana.required'             => 'Selecione o dia da semana.',
+        ];
+    }
+
     public function prever(DeliveryApiService $api): void
     {
         $this->validate();

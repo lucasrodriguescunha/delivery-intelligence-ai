@@ -3,37 +3,37 @@
         <div class="grid gap-4 sm:grid-cols-2">
             <flux:field>
                 <flux:label>Valor do pedido (R$)</flux:label>
-                <flux:input type="number" step="0.01" min="0" wire:model="valor_pedido" />
+                <flux:input type="number" step="0.01" min="0" wire:model="valor_pedido" placeholder="ex: 45.90" />
                 <flux:error name="valor_pedido" />
             </flux:field>
 
             <flux:field>
                 <flux:label>Quantidade de itens</flux:label>
-                <flux:input type="number" min="1" wire:model="quantidade_itens" />
+                <flux:input type="number" min="1" wire:model="quantidade_itens" placeholder="ex: 3" />
                 <flux:error name="quantidade_itens" />
             </flux:field>
 
             <flux:field>
                 <flux:label>Tempo de preparo (min)</flux:label>
-                <flux:input type="number" step="0.5" min="0" wire:model="tempo_preparo_minutos" />
+                <flux:input type="number" step="0.5" min="0" wire:model="tempo_preparo_minutos" placeholder="ex: 20" />
                 <flux:error name="tempo_preparo_minutos" />
             </flux:field>
 
             <flux:field>
                 <flux:label>Tempo estimado entrega (min)</flux:label>
-                <flux:input type="number" step="0.5" min="0" wire:model="tempo_estimado_minutos" />
+                <flux:input type="number" step="0.5" min="0" wire:model="tempo_estimado_minutos" placeholder="ex: 40" />
                 <flux:error name="tempo_estimado_minutos" />
             </flux:field>
 
             <flux:field>
                 <flux:label>Distância (km)</flux:label>
-                <flux:input type="number" step="0.1" min="0" wire:model="distancia_km" />
+                <flux:input type="number" step="0.1" min="0" wire:model="distancia_km" placeholder="ex: 5.2" />
                 <flux:error name="distancia_km" />
             </flux:field>
 
             <flux:field>
                 <flux:label>Hora do pedido (0–23)</flux:label>
-                <flux:input type="number" min="0" max="23" wire:model="hora" />
+                <flux:input type="number" min="0" max="23" wire:model="hora" placeholder="ex: 14" />
                 <flux:error name="hora" />
             </flux:field>
 
