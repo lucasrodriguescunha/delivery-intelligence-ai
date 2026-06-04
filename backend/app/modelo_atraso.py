@@ -119,3 +119,4 @@ def treinar(caminho_csv: str = "../../data/pedidos.csv") -> Pipeline:
 
 if __name__ == "__main__":
     treinar()
+    print()
