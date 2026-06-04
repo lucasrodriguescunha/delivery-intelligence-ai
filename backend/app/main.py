@@ -4,6 +4,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
@@ -79,6 +80,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Delivery Intelligence AI", lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8001"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # --- Schemas ---
 
@@ -114,6 +122,15 @@ class InsightsRequest(BaseModel):
 @app.get("/health")
 def health():
     return {"status": "ok", "modelo_carregado": "pipeline" in estado}
+
+
+@app.get("/metricas")
+def metricas():
+    df_pedidos = estado.get("df_pedidos")
+    df_avaliacoes = estado.get("df_avaliacoes")
+    if df_pedidos is None or df_avaliacoes is None:
+        raise HTTPException(status_code=503, detail="Dados não inicializados")
+    return calcular_metricas(df_pedidos, df_avaliacoes)
 
 
 @app.post("/prever-atraso", response_model=PreverAtrasoResponse)

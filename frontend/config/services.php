@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'delivery_api' => [
+        'url' => env('DELIVERY_API_URL', 'http://localhost:8000'),
+    ],
+
 ];

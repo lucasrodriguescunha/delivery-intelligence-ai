@@ -16,6 +16,20 @@
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
+
+                <flux:sidebar.group heading="Delivery Intelligence" class="grid">
+                    <flux:sidebar.item icon="clock" :href="route('prever-atraso')" :current="request()->routeIs('prever-atraso')" wire:navigate>
+                        Prever atraso
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="magnifying-glass" :href="route('buscar-avaliacoes')" :current="request()->routeIs('buscar-avaliacoes')" wire:navigate>
+                        Buscar avaliações
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="sparkles" :href="route('insights')" :current="request()->routeIs('insights')" wire:navigate>
+                        Insights (GPT-4o)
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
