@@ -17,7 +17,7 @@ uses(RefreshDatabase::class)->group('integration');
 
 beforeEach(function () {
     if (env('BACKEND_AVAILABLE') !== 'true') {
-        test()->skip('Backend not available. Set BACKEND_AVAILABLE=true to run integration tests.');
+        $this->markTestSkipped('Backend not available. Set BACKEND_AVAILABLE=true to run integration tests.');
     }
 });
 
