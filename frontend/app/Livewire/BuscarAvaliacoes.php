@@ -21,6 +21,7 @@ class BuscarAvaliacoes extends Component
     public ?string $erro = null;
     public bool $carregando = false;
     public bool $buscado = false;
+    public int $visiveis = 4;
 
     protected function messages(): array
     {
@@ -51,11 +52,17 @@ class BuscarAvaliacoes extends Component
                 $this->filtro_nota_minima,
             );
             $this->buscado = true;
+            $this->visiveis = 4;
         } catch (\Throwable $e) {
             $this->erro = $e->getMessage();
         } finally {
             $this->carregando = false;
         }
+    }
+
+    public function verMais(): void
+    {
+        $this->visiveis += 4;
     }
 
     public function render()

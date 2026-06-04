@@ -1,16 +1,16 @@
 <div class="max-w-2xl space-y-6">
     <form wire:submit="buscar" class="space-y-4">
-        <div class="grid gap-4 sm:grid-cols-2">
+        <div class="grid gap-4 sm:grid-cols-2 items-start">
             <flux:field class="sm:col-span-2">
                 <flux:label>Busca semântica</flux:label>
                 <flux:input wire:model="query" placeholder="ex: entrega demorada comida fria" />
-                <flux:error name="query" />
+                <flux:error name="query" class="!mt-0" />
             </flux:field>
 
             <flux:field>
                 <flux:label>Resultados</flux:label>
                 <flux:input type="number" min="1" max="20" wire:model="n_resultados" placeholder="ex: 5" />
-                <flux:error name="n_resultados" />
+                <flux:error name="n_resultados" class="!mt-0" />
             </flux:field>
 
             <flux:field>
@@ -40,7 +40,7 @@
 
     @if (!empty($resultados))
         <div class="space-y-3">
-            @foreach ($resultados as $r)
+            @foreach (array_slice($resultados, 0, $visiveis) as $r)
                 <flux:card class="space-y-2">
                     <div class="flex items-center justify-between">
                         <flux:heading size="sm">{{ $r['restaurante'] ?? '—' }}</flux:heading>
@@ -55,6 +55,14 @@
                     </flux:text>
                 </flux:card>
             @endforeach
+
+            @if ($visiveis < count($resultados))
+                <div class="pt-1 text-center">
+                    <flux:button wire:click="verMais" variant="ghost" size="sm">
+                        Ver mais ({{ count($resultados) - $visiveis }} restantes)
+                    </flux:button>
+                </div>
+            @endif
         </div>
     @endif
 </div>
