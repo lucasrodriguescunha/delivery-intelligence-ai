@@ -242,7 +242,7 @@ docker run -p 8000:8000 -e OPENAI_API_KEY="sk-..." delivery-intelligence-ai
 # Backend (pytest) — 50 testes
 cd backend && pytest
 
-# Frontend (Pest PHP) — 100 testes
+# Frontend (Pest PHP) — 103 testes
 cd frontend && php artisan test
 
 # Frontend: testes de integração com backend real

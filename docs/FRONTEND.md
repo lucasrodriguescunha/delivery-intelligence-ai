@@ -106,7 +106,7 @@ $api->insights($query, $nReviews);           // POST /insights
 
 ## Testes
 
-Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **100 testes**.
+Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **103 testes**.
 
 ```bash
 cd frontend && php artisan test
@@ -123,7 +123,7 @@ tests/
 ├── Feature/
 │   ├── Livewire/
 │   │   ├── DashboardTest.php            #  8 testes — mount, erro API, auth
-│   │   ├── BuscarAvaliacoesTest.php     # 12 testes — validação, busca, filtros
+│   │   ├── BuscarAvaliacoesTest.php     # 15 testes — validação, busca, filtros
 │   │   ├── PreverAtrasoTest.php         # 16 testes — validação de 8 campos, predição
 │   │   └── InsightsTest.php            # 12 testes — validação, geração, erros
 │   ├── Auth/                            # Testes de autenticação (Fortify)
@@ -152,7 +152,7 @@ Formulário com 8 campos (valor, itens, tempos, distância, hora, clima, dia). V
 
 ### Buscar Avaliações
 
-Busca semântica com query em linguagem natural, quantidade de resultados e filtro opcional de nota mínima. Cada resultado exibe comentário, restaurante, nota e score de similaridade.
+Busca semântica com query em linguagem natural (3–200 caracteres), quantidade de resultados (1–20) e filtro opcional de nota mínima (0–5). Validação server-side com `#[Validate]` e mensagens em PT-BR. Cada resultado exibe comentário, restaurante, nota e score de similaridade.
 
 ### Insights (GPT-4o)
 
