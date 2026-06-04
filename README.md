@@ -1,12 +1,29 @@
 # Delivery Intelligence AI
 
+<!-- Python ecosystem -->
 ![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=flat&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat&logo=fastapi&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-3.0+-150458?style=flat&logo=pandas&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-3.10+-11557C?style=flat&logo=python&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.5+-F7931E?style=flat&logo=scikit-learn&logoColor=white)
+![joblib](https://img.shields.io/badge/joblib-1.4+-3776AB?style=flat&logo=python&logoColor=white)
+<!-- API -->
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat&logo=fastapi&logoColor=white)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-0.32+-499848?style=flat&logo=gunicorn&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-2.0+-E92063?style=flat&logo=pydantic&logoColor=white)
+![HTTPX](https://img.shields.io/badge/HTTPX-0.27+-009688?style=flat&logo=python&logoColor=white)
+<!-- AI / ML -->
+![sentence-transformers](https://img.shields.io/badge/sentence--transformers-3.0+-FF6F00?style=flat&logo=huggingface&logoColor=white)
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-FF6B35?style=flat&logo=databricks&logoColor=white)
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-412991?style=flat&logo=openai&logoColor=white)
+<!-- Frontend -->
+![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat&logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-13+-FF2D20?style=flat&logo=laravel&logoColor=white)
 ![Livewire](https://img.shields.io/badge/Livewire-4.1+-4E56A6?style=flat&logo=livewire&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0+-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8.0+-646CFF?style=flat&logo=vite&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat&logo=sqlite&logoColor=white)
+<!-- Testes / Infra -->
+![pytest](https://img.shields.io/badge/pytest-9.0+-0A9EDC?style=flat&logo=pytest&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 
 Plataforma de inteligência operacional para restaurantes em ambiente de delivery, construída em fases incrementais. Combina machine learning, busca semântica, geração de insights via LLM e uma interface web completa.
@@ -220,3 +237,4 @@ cd backend/app && pytest
 | Busca semântica / embeddings | [docs/Embeddings.md](docs/Embeddings.md) |
 | Geração de insights com LLM | [docs/LLM_Insights.md](docs/LLM_Insights.md) |
 | Rotas da API | [docs/ROTAS.md](docs/ROTAS.md) |
+| Frontend Laravel | [docs/FRONTEND.md](docs/FRONTEND.md) |

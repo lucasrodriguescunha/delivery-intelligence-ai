@@ -37,7 +37,7 @@
             </flux:card>
 
             <flux:card>
-                <flux:heading size="sm" class="text-zinc-500">Clima com mais atraso</flux:heading>
+                <flux:heading size="sm" class="text-zinc-500">Clima com mais atrasos</flux:heading>
                 <p class="mt-1 text-2xl font-bold">{{ $metricas['clima_maior_atraso'] }}</p>
             </flux:card>
 

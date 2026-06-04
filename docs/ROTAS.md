@@ -21,6 +21,33 @@ Verifica se a API está no ar e o modelo carregado.
 
 ---
 
+## GET `/metricas`
+
+Retorna métricas operacionais agregadas dos dados de pedidos e avaliações.
+
+**Resposta**
+
+```json
+{
+  "ticket_medio_R$": 48.75,
+  "total_pedidos": 1000,
+  "pedidos_atrasados": 312,
+  "percentual_atraso_%": 31.2,
+  "tempo_medio_entrega_min": 43.6,
+  "nota_media_geral": 3.82,
+  "clima_maior_atraso": "Chuva",
+  "dia_maior_volume": "Sexta"
+}
+```
+
+**Erros**
+
+| Status | Motivo |
+|---|---|
+| `503` | Dados não inicializados |
+
+---
+
 ## POST `/prever-atraso`
 
 Prevê se um pedido será entregue com atraso usando o modelo de Regressão Logística.
@@ -157,6 +184,9 @@ Gera análise operacional em streaming combinando métricas e avaliações via G
 ```bash
 # Health check
 curl http://localhost:8000/health
+
+# Métricas
+curl http://localhost:8000/metricas
 
 # Prever atraso
 curl -X POST http://localhost:8000/prever-atraso \
