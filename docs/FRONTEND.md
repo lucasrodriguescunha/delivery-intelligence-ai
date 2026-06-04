@@ -106,7 +106,7 @@ $api->insights($query, $nReviews);           // POST /insights
 
 ## Testes
 
-Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **105 testes**.
+Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **123 testes** (114 executados por padrão; 9 de integração requerem backend real).
 
 ```bash
 cd frontend && php artisan test
@@ -122,12 +122,12 @@ tests/
 │                                        #   payloads, propagação de erro, URL
 ├── Feature/
 │   ├── Livewire/
-│   │   ├── DashboardTest.php            #  8 testes — mount, erro API, auth
-│   │   ├── BuscarAvaliacoesTest.php     # 17 testes — validação, busca, filtros, paginação
-│   │   ├── PreverAtrasoTest.php         # 16 testes — validação de 8 campos, predição
-│   │   └── InsightsTest.php            # 12 testes — validação, geração, erros
-│   ├── Auth/                            # Testes de autenticação (Fortify)
-│   ├── Settings/                        # Testes de perfil e segurança
+│   │   ├── DashboardTest.php            # 17 testes — mount, charts, erro API, auth
+│   │   ├── BuscarAvaliacoesTest.php     # 19 testes — validação, busca, filtros, paginação
+│   │   ├── PreverAtrasoTest.php         # 17 testes — validação de 8 campos, predição
+│   │   └── InsightsTest.php            # 13 testes — validação, geração, erros
+│   ├── Auth/                            # 18 testes de autenticação (Fortify)
+│   ├── Settings/                        # 11 testes de perfil e segurança
 │   └── Integration/
 │       └── DeliveryApiIntegrationTest.php  # 9 testes — requer backend real
 ```

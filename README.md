@@ -184,7 +184,7 @@ delivery-intelligence-ai/
 │   └── tests/
 │       ├── Unit/Services/    # DeliveryApiServiceTest (15 testes)
 │       └── Feature/
-│           ├── Livewire/     # Dashboard, BuscarAvaliacoes, PreverAtraso, Insights (50 testes)
+│           ├── Livewire/     # Dashboard, BuscarAvaliacoes, PreverAtraso, Insights (66 testes)
 │           └── Integration/  # Testes com backend real (requer BACKEND_AVAILABLE=true)
 └── docs/
     ├── ANALISE_EXPLORATORIA.md
@@ -250,10 +250,10 @@ docker run -p 8000:8000 -e OPENAI_API_KEY="sk-..." delivery-intelligence-ai
 ## Testes
 
 ```bash
-# Backend (pytest) — 51 testes
+# Backend (pytest) — 52 testes
 cd backend && pytest
 
-# Frontend (Pest PHP) — 105 testes
+# Frontend (Pest PHP) — 123 testes (114 por padrão, 9 de integração requerem backend)
 cd frontend && php artisan test
 
 # Frontend: testes de integração com backend real

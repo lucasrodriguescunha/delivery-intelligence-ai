@@ -161,18 +161,15 @@ Gera análise operacional em streaming combinando métricas e avaliações via G
 
 **Resposta**
 
-`text/plain; charset=utf-8` em streaming com três seções:
+`application/json`
 
+```json
+{
+  "texto": "## Diagnóstico\n...\n\n## Recomendações\n...\n\n## Alertas\n..."
+}
 ```
-## Diagnóstico
-...
 
-## Recomendações
-...
-
-## Alertas
-...
-```
+O campo `texto` contém a análise completa com três seções: **Diagnóstico**, **Recomendações** e **Alertas**.
 
 **Erros**
 
