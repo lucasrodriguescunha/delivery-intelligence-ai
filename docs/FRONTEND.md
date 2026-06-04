@@ -104,6 +104,42 @@ $api->buscarAvaliacoes($query, $n, $nota);   // POST /buscar-avaliacoes
 $api->insights($query, $nReviews);           // POST /insights
 ```
 
+## Testes
+
+Framework: **Pest PHP 4.7** com `pest-plugin-laravel`. Total: **100 testes**.
+
+```bash
+cd frontend && php artisan test
+```
+
+### Estrutura
+
+```
+tests/
+├── Unit/
+│   └── Services/
+│       └── DeliveryApiServiceTest.php   # 15 testes — todos os 4 métodos HTTP,
+│                                        #   payloads, propagação de erro, URL
+├── Feature/
+│   ├── Livewire/
+│   │   ├── DashboardTest.php            #  8 testes — mount, erro API, auth
+│   │   ├── BuscarAvaliacoesTest.php     # 12 testes — validação, busca, filtros
+│   │   ├── PreverAtrasoTest.php         # 16 testes — validação de 8 campos, predição
+│   │   └── InsightsTest.php            # 12 testes — validação, geração, erros
+│   ├── Auth/                            # Testes de autenticação (Fortify)
+│   ├── Settings/                        # Testes de perfil e segurança
+│   └── Integration/
+│       └── DeliveryApiIntegrationTest.php  # 9 testes — requer backend real
+```
+
+### Testes de integração
+
+Requerem o backend FastAPI rodando. Ignorados por padrão.
+
+```bash
+BACKEND_AVAILABLE=true php artisan test --group=integration
+```
+
 ## Páginas
 
 ### Dashboard

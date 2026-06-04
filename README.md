@@ -24,6 +24,7 @@
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat&logo=sqlite&logoColor=white)
 <!-- Testes / Infra -->
 ![pytest](https://img.shields.io/badge/pytest-9.0+-0A9EDC?style=flat&logo=pytest&logoColor=white)
+![Pest](https://img.shields.io/badge/Pest-4.7+-F4645F?style=flat&logo=php&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 
 Plataforma de inteligência operacional para restaurantes em ambiente de delivery, construída em fases incrementais. Combina machine learning, busca semântica, geração de insights via LLM e uma interface web completa.
@@ -166,9 +167,14 @@ delivery-intelligence-ai/
 │   ├── app/
 │   │   ├── Livewire/         # Componentes reativos
 │   │   └── Services/         # DeliveryApiService
-│   └── resources/views/
-│       ├── dashboard.blade.php
-│       └── pages/delivery/   # prever-atraso, buscar-avaliacoes, insights
+│   ├── resources/views/
+│   │   ├── dashboard.blade.php
+│   │   └── pages/delivery/   # prever-atraso, buscar-avaliacoes, insights
+│   └── tests/
+│       ├── Unit/Services/    # DeliveryApiServiceTest (15 testes)
+│       └── Feature/
+│           ├── Livewire/     # Dashboard, BuscarAvaliacoes, PreverAtraso, Insights (48 testes)
+│           └── Integration/  # Testes com backend real (requer BACKEND_AVAILABLE=true)
 └── docs/
     ├── ANALISE_EXPLORATORIA.md
     ├── MODELO_DE_ATRASO.md
@@ -188,7 +194,7 @@ delivery-intelligence-ai/
 | LLM | OpenAI GPT-4o |
 | API | FastAPI · Uvicorn · Pydantic |
 | Frontend | Laravel 13 · Livewire 4 · Flux UI |
-| Testes | pytest |
+| Testes | pytest · Pest PHP |
 | Infraestrutura | Docker |
 
 ## Setup
@@ -233,7 +239,14 @@ docker run -p 8000:8000 -e OPENAI_API_KEY="sk-..." delivery-intelligence-ai
 ## Testes
 
 ```bash
+# Backend (pytest) — 50 testes
 cd backend && pytest
+
+# Frontend (Pest PHP) — 100 testes
+cd frontend && php artisan test
+
+# Frontend: testes de integração com backend real
+cd frontend && BACKEND_AVAILABLE=true php artisan test --group=integration
 ```
 
 ## Documentação
