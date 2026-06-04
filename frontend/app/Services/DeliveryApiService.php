@@ -36,9 +36,9 @@ class DeliveryApiService
 
     public function insights(string $query = 'atraso entrega qualidade', int $nReviews = 10): string
     {
-        return Http::timeout(60)
+        return Http::timeout(120)
             ->post("{$this->base}/insights", ['query' => $query, 'n_reviews' => $nReviews])
             ->throw()
-            ->body();
+            ->json('texto', '');
     }
 }

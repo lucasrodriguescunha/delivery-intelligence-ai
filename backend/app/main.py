@@ -5,12 +5,11 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 import chromadb
 from embeddings import criar_colecao, criar_funcao_embedding, buscar, popular_colecao, carregar_avaliacoes
-from insights import gerar_insights_stream
+from insights import gerar_insights as _gerar_insights
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "../../data"
@@ -175,7 +174,4 @@ def gerar_insights(request: InsightsRequest):
     metricas = calcular_metricas(df_pedidos, df_avaliacoes)
     reviews = buscar(colecao, query=request.query, n_resultados=request.n_reviews)
 
-    return StreamingResponse(
-        gerar_insights_stream(metricas, reviews),
-        media_type="text/plain; charset=utf-8",
-    )
+    return {"texto": _gerar_insights(metricas, reviews)}

@@ -41,6 +41,13 @@ def _formatar_reviews(reviews: list[dict]) -> str:
     )
 
 
+def gerar_insights(
+    metricas: dict,
+    reviews: list[dict],
+) -> str:
+    return "".join(gerar_insights_stream(metricas, reviews))
+
+
 def gerar_insights_stream(
     metricas: dict,
     reviews: list[dict],
