@@ -226,26 +226,28 @@ def test_buscar_avaliacoes_repassa_filtro_nota(client):
 
 # --- /insights ---
 
-def _gen_fake():
-    yield "insight gerado"
-
-
 def test_insights_retorna_200(client):
-    with patch("main.buscar", return_value=[]), patch(
-        "main.gerar_insights_stream", return_value=_gen_fake()
-    ):
+    with patch("main.buscar", return_value=[]), \
+         patch("main._gerar_insights", return_value="insight gerado"), \
+         patch.dict("os.environ", {"OPENAI_API_KEY": "sk-test"}):
         assert client.post("/insights", json={}).status_code == 200
 
 
 def test_insights_sem_servicos_retorna_503():
     estado.clear()
-    with TestClient(app) as c:
+    with TestClient(app) as c, patch.dict("os.environ", {"OPENAI_API_KEY": "sk-test"}):
         assert c.post("/insights", json={}).status_code == 503
 
 
-def test_insights_retorna_conteudo_streaming(client):
-    with patch("main.buscar", return_value=[]), patch(
-        "main.gerar_insights_stream", return_value=_gen_fake()
-    ):
+def test_insights_sem_api_key_retorna_503(client):
+    env_sem_key = {k: v for k, v in __import__("os").environ.items() if k != "OPENAI_API_KEY"}
+    with patch.dict("os.environ", env_sem_key, clear=True):
+        assert client.post("/insights", json={}).status_code == 503
+
+
+def test_insights_retorna_texto(client):
+    with patch("main.buscar", return_value=[]), \
+         patch("main._gerar_insights", return_value="insight gerado"), \
+         patch.dict("os.environ", {"OPENAI_API_KEY": "sk-test"}):
         resp = client.post("/insights", json={})
-    assert "insight gerado" in resp.text
+    assert resp.json()["texto"] == "insight gerado"
