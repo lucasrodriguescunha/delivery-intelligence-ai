@@ -1,2 +1,5 @@
-pandas
-matplotlib
+pandas>=3.0.2
+matplotlib>=3.10.9
+scikit-learn>=1.5.0
+joblib>=1.4.0
+pytest>=9.0.3
