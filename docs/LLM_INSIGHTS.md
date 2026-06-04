@@ -45,11 +45,18 @@ Calculadas em `main.py::calcular_metricas()`:
 
 ## Configuração
 
-Requer variável de ambiente:
+Requer `OPENAI_API_KEY`. Formas de configurar:
 
 ```bash
+# Opção 1 — arquivo .env (recomendado)
+cp backend/.env.example backend/.env
+# editar backend/.env e preencher OPENAI_API_KEY=sk-...
+
+# Opção 2 — variável de ambiente
 export OPENAI_API_KEY="sk-..."
 ```
+
+Se a chave não estiver configurada, o endpoint `/insights` retorna **503** com mensagem `OPENAI_API_KEY não configurada`.
 
 Modelo configurável em `insights.py`:
 
@@ -85,4 +92,5 @@ for chunk in gerar_insights_stream(metricas, reviews):
 
 ```
 openai>=1.0.0
+python-dotenv>=1.0.0
 ```

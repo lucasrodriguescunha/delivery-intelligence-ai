@@ -148,6 +148,7 @@ delivery-intelligence-ai/
 ├── backend/
 │   ├── requirements.txt
 │   ├── pytest.ini
+│   ├── .env.example          # Variáveis de ambiente (copiar para .env)
 │   ├── app/
 │   │   ├── main.py           # API FastAPI
 │   │   ├── analise.py        # Análise exploratória e gráficos
@@ -213,8 +214,8 @@ cd frontend && composer install && npm install && cp .env.example .env
 php artisan key:generate && php artisan migrate
 
 # 4. Variáveis de ambiente
-# backend/.env ou export:
-export OPENAI_API_KEY="sk-..."
+cp backend/.env.example backend/.env
+# Editar backend/.env e preencher OPENAI_API_KEY=sk-...
 # frontend/.env:
 # DELIVERY_API_URL=http://localhost:8000
 ```
@@ -239,7 +240,7 @@ docker run -p 8000:8000 -e OPENAI_API_KEY="sk-..." delivery-intelligence-ai
 ## Testes
 
 ```bash
-# Backend (pytest) — 50 testes
+# Backend (pytest) — 51 testes
 cd backend && pytest
 
 # Frontend (Pest PHP) — 105 testes
