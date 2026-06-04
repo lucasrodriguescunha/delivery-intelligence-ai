@@ -148,7 +148,7 @@ percentual_atraso_por_clima.plot(
     edgecolor="white"
 )
 
-ax.set_title("% de Pedidos atrasados por clima")
+ax.set_title("% de pedidos atrasados por clima")
 ax.set_xlabel("Clima")
 ax.set_ylabel("% Atrasados")
 ax.set_xticklabels(ax.get_xticklabels(), rotation=0)
