@@ -19,7 +19,8 @@ test('component initializes with correct defaults', function () {
         ->assertSet('resultados', [])
         ->assertSet('erro', null)
         ->assertSet('carregando', false)
-        ->assertSet('buscado', false);
+        ->assertSet('buscado', false)
+        ->assertSet('visiveis', 4);
 });
 
 // --- validation ---
@@ -188,4 +189,26 @@ test('new search clears previous resultados and erro', function () {
     $component->call('buscar');
     expect($component->erro)->toBeNull();
     expect($component->resultados)->toBe($ok);
+});
+
+// --- pagination ---
+
+test('verMais increments visiveis by 4', function () {
+    Livewire::test(BuscarAvaliacoes::class)
+        ->assertSet('visiveis', 4)
+        ->call('verMais')
+        ->assertSet('visiveis', 8)
+        ->call('verMais')
+        ->assertSet('visiveis', 12);
+});
+
+test('buscar resets visiveis to 4', function () {
+    Http::fake(['test-api:8000/buscar-avaliacoes' => Http::response(['resultados' => []])]);
+
+    Livewire::test(BuscarAvaliacoes::class)
+        ->call('verMais')
+        ->assertSet('visiveis', 8)
+        ->set('query', 'atraso')
+        ->call('buscar')
+        ->assertSet('visiveis', 4);
 });
