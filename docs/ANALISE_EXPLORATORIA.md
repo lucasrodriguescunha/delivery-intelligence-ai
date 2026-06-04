@@ -20,6 +20,7 @@ Carrega os três CSVs de dados, calcula métricas gerais e gera três gráficos 
 | Nota média geral | Média das avaliações (escala 1–5) |
 | Pedidos por dia da semana | Volume por dia |
 | % atraso por clima | Taxa de atraso por condição climática |
+| Tempo médio de entrega por dia | Média de minutos por dia da semana |
 | Top 5 restaurantes por nota | Melhores avaliados |
 
 ### Gráficos gerados
@@ -27,7 +28,8 @@ Carrega os três CSVs de dados, calcula métricas gerais e gera três gráficos 
 | Arquivo | Conteúdo |
 |---|---|
 | `graficos/pedidos_por_dia.png` | Barras com volume de pedidos por dia da semana |
-| `graficos/atraso_por_clima.png` | Barras com % de atraso por clima (vermelho > 50%, azul ≤ 50%) |
+| `graficos/atraso_por_clima.png` | Barras com % de atraso por clima (vermelho > 50%, azul ≤ 50%), ordenado decrescente |
+| `graficos/tempo_medio_por_dia.png` | Linha com tempo médio de entrega (min) por dia da semana |
 | `graficos/top5_restaurantes.png` | Barras horizontais com top 5 restaurantes por nota média |
 
 ## Como executar

@@ -38,7 +38,7 @@ Retorna métricas operacionais agregadas dos dados de pedidos e avaliações.
   "clima_maior_atraso": "Chuva",
   "dia_maior_volume": "Sexta",
   "pedidos_por_dia": {"Segunda": 120, "Sexta": 210, "Sábado": 180},
-  "atraso_por_clima": {"Chuva": 45.2, "Ensolarado": 18.1, "Nublado": 22.3},
+  "atraso_por_clima": {"Chuva": 45.2, "Nublado": 22.3, "Ensolarado": 18.1},
   "tempo_por_dia": {"Segunda": 38.5, "Sexta": 51.2, "Sábado": 48.0}
 }
 ```

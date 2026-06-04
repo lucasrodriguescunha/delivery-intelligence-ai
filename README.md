@@ -120,7 +120,7 @@ python ml/modelo_atraso.py   # treina e salva em ml/modelo_atraso.joblib
 - CORS configurado para o frontend
 
 **Frontend (Laravel 13 + Livewire 4 + Flux UI):**
-- Dashboard com cards de métricas em tempo real
+- Dashboard com 7 cards de métricas e 3 gráficos interativos (Chart.js)
 - Formulário de previsão de atraso com feedback visual
 - Interface de busca semântica com filtro de nota
 - Gerador de insights com query customizável
@@ -129,7 +129,7 @@ python ml/modelo_atraso.py   # treina e salva em ml/modelo_atraso.joblib
 
 ```bash
 # FastAPI
-cd backend/app && uvicorn main:app --reload --port 8000
+cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 # Laravel
 cd frontend && php artisan serve --port=8001
@@ -234,7 +234,7 @@ cp backend/.env.example backend/.env
 
 ```bash
 # Terminal 1 — FastAPI
-cd backend/app && uvicorn main:app --reload --port 8000
+cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 # Terminal 2 — Laravel
 cd frontend && php artisan serve --port=8001

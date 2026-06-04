@@ -146,6 +146,14 @@ BACKEND_AVAILABLE=true php artisan test --group=integration
 
 Exibe 7 cards com métricas operacionais carregadas no `mount()` do componente Livewire. Mostra estado de erro se a API estiver indisponível.
 
+Abaixo dos cards, três gráficos renderizados com **Chart.js** (CDN) via Alpine.js `x-init`:
+
+| Gráfico | Tipo | Dados |
+|---|---|---|
+| Pedidos por dia da semana | Barras | `pedidos_por_dia` |
+| % de pedidos atrasados por clima | Barras (ordem decrescente) | `atraso_por_clima` |
+| Tempo médio de entrega por dia (min) | Linha com área | `tempo_por_dia` |
+
 ### Prever Atraso
 
 Formulário com 8 campos (valor, itens, tempos, distância, hora, clima, dia). Validação server-side com `#[Validate]`. Resultado exibe probabilidade e badge visual verde/vermelho.

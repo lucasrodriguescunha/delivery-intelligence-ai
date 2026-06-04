@@ -1,6 +1,8 @@
 import pandas as pd
 import pytest
 
+from services.metricas import calcular_metricas
+
 
 @pytest.fixture
 def pedidos():
@@ -86,6 +88,12 @@ def test_atraso_por_clima(pedidos):
     assert resultado["Chuvoso"] == pytest.approx(100.0)
     assert resultado["Ensolarado"] == pytest.approx(0.0)
     assert resultado["Nublado"] == pytest.approx(0.0)
+
+
+def test_atraso_por_clima_ordenado_decrescente(pedidos, avaliacoes):
+    resultado = calcular_metricas(pedidos, avaliacoes)
+    valores = list(resultado["atraso_por_clima"].values())
+    assert valores == sorted(valores, reverse=True)
 
 
 def test_top5_restaurantes(avaliacoes, restaurantes):
