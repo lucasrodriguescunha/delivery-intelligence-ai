@@ -34,7 +34,7 @@ def calcular_metricas(df: pd.DataFrame, df_avaliacoes: pd.DataFrame) -> dict:
     pedidos_por_dia = _ordenar_dias(df.groupby("dia_semana").size().to_dict())
     atraso_por_clima = {
         k: round(float(v) * 100, 1)
-        for k, v in df.groupby("clima")["atrasado"].mean().items()
+        for k, v in df.groupby("clima")["atrasado"].mean().sort_values(ascending=False).items()
     }
     tempo_por_dia = _ordenar_dias({
         k: round(float(v), 1)

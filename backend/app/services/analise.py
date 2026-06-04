@@ -176,3 +176,35 @@ plt.close()
 
 print(f"Gráfico de top 5 restaurantes gerado e salvo em: {_GRAFICOS / 'top5_restaurantes.png'}")
 print()
+
+
+tempo_medio_por_dia = (
+    df_pedidos
+    .groupby("dia_semana")["tempo_total_minutos"]
+    .mean()
+    .reindex(ordem_dias_semana)
+    .rename_axis(None)
+    .round(1)
+)
+
+fig, ax = plt.subplots(figsize=(8, 4))
+
+tempo_medio_por_dia.plot(
+    kind="line",
+    ax=ax,
+    color="darkorange",
+    marker="o",
+)
+
+ax.fill_between(ax.get_xticks(), tempo_medio_por_dia.values, alpha=0.1, color="darkorange")
+ax.set_title("Tempo médio de entrega por dia (min)")
+ax.set_xlabel("Dia")
+ax.set_ylabel("Minutos")
+ax.set_xticks(range(len(ordem_dias_semana)))
+ax.set_xticklabels(ordem_dias_semana, rotation=30, ha="right")
+
+plt.tight_layout()
+plt.savefig(_GRAFICOS / "tempo_medio_por_dia.png")
+plt.close()
+
+print(f"Gráfico de tempo médio por dia gerado e salvo em: {_GRAFICOS / 'tempo_medio_por_dia.png'}")

@@ -91,7 +91,7 @@
 
             {{-- % Atraso por clima --}}
             <flux:card class="flex flex-col gap-4">
-                <flux:heading size="sm">% Atraso por condição climática</flux:heading>
+                <flux:heading size="sm">% de pedidos atrasados por clima</flux:heading>
                 <div
                     x-data="{
                         init() {
