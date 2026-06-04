@@ -84,19 +84,26 @@ def buscar(
 ) -> list[dict]:
     where = {"nota": {"$gte": filtro_nota_minima}} if filtro_nota_minima else None
 
+    # Busca mais resultados para compensar duplicatas de texto
+    n_fetch = min(n_resultados * 20, colecao.count())
+
     resultado = colecao.query(
         query_texts=[query],
-        n_results=n_resultados,
+        n_results=n_fetch,
         where=where,
         include=["documents", "metadatas", "distances"],
     )
 
     itens = []
+    vistos = set()
     for doc, meta, dist in zip(
         resultado["documents"][0],
         resultado["metadatas"][0],
         resultado["distances"][0],
     ):
+        if doc in vistos:
+            continue
+        vistos.add(doc)
         itens.append(
             {
                 "comentario": doc,
@@ -105,6 +112,8 @@ def buscar(
                 "similaridade": round(1 - dist, 4),
             }
         )
+        if len(itens) == n_resultados:
+            break
 
     return itens
 
