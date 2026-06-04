@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 import chromadb
 
-from embeddings import (
+from rag.embeddings import (
     buscar,
     carregar_avaliacoes,
     criar_colecao,

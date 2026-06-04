@@ -8,20 +8,23 @@ from fastapi.testclient import TestClient
 
 # Stub módulos pesados antes de importar main.
 # patch.dict remove "main" de sys.modules ao sair do contexto (não estava lá antes),
-# então patch("main.buscar") reimportaria um módulo diferente sem os stubs.
+# então patch("api.routes.buscar") reimportaria um módulo diferente sem os stubs.
 # Registrar manualmente mantém a referência correta.
 with patch.dict(
     "sys.modules",
     {
         "chromadb": MagicMock(),
         "joblib": MagicMock(),
-        "embeddings": MagicMock(),
-        "insights": MagicMock(),
+        "rag.embeddings": MagicMock(),
+        "services.insights": MagicMock(),
     },
 ):
     import main as _main_mod
+    import api.routes as _routes_mod  # captura referência antes de patch.dict limpar
 
+# Mantém módulos stub-based em sys.modules para que patch() encontre o mesmo objeto
 sys.modules["main"] = _main_mod
+sys.modules["api.routes"] = _routes_mod
 app = _main_mod.app
 estado = _main_mod.estado
 
@@ -44,6 +47,9 @@ METRICAS_KEYS = {
     "nota_media_geral",
     "clima_maior_atraso",
     "dia_maior_volume",
+    "pedidos_por_dia",
+    "atraso_por_clima",
+    "tempo_por_dia",
 }
 
 
@@ -197,12 +203,12 @@ _RESULTADO_FAKE = [
 
 
 def test_buscar_avaliacoes_retorna_200(client):
-    with patch("main.buscar", return_value=_RESULTADO_FAKE):
+    with patch("api.routes.buscar", return_value=_RESULTADO_FAKE):
         assert client.post("/buscar-avaliacoes", json={"query": "entrega"}).status_code == 200
 
 
 def test_buscar_avaliacoes_tem_chave_resultados(client):
-    with patch("main.buscar", return_value=_RESULTADO_FAKE):
+    with patch("api.routes.buscar", return_value=_RESULTADO_FAKE):
         resp = client.post("/buscar-avaliacoes", json={"query": "entrega"})
     assert "resultados" in resp.json()
 
@@ -214,7 +220,7 @@ def test_buscar_avaliacoes_sem_chroma_retorna_503():
 
 
 def test_buscar_avaliacoes_repassa_filtro_nota(client):
-    with patch("main.buscar", return_value=[]) as mock_buscar:
+    with patch("api.routes.buscar", return_value=[]) as mock_buscar:
         resp = client.post(
             "/buscar-avaliacoes",
             json={"query": "bom", "filtro_nota_minima": 4.0},
@@ -227,8 +233,8 @@ def test_buscar_avaliacoes_repassa_filtro_nota(client):
 # --- /insights ---
 
 def test_insights_retorna_200(client):
-    with patch("main.buscar", return_value=[]), \
-         patch("main._gerar_insights", return_value="insight gerado"), \
+    with patch("api.routes.buscar", return_value=[]), \
+         patch("api.routes._gerar_insights", return_value="insight gerado"), \
          patch.dict("os.environ", {"OPENAI_API_KEY": "sk-test"}):
         assert client.post("/insights", json={}).status_code == 200
 
@@ -246,8 +252,8 @@ def test_insights_sem_api_key_retorna_503(client):
 
 
 def test_insights_retorna_texto(client):
-    with patch("main.buscar", return_value=[]), \
-         patch("main._gerar_insights", return_value="insight gerado"), \
+    with patch("api.routes.buscar", return_value=[]), \
+         patch("api.routes._gerar_insights", return_value="insight gerado"), \
          patch.dict("os.environ", {"OPENAI_API_KEY": "sk-test"}):
         resp = client.post("/insights", json={})
     assert resp.json()["texto"] == "insight gerado"

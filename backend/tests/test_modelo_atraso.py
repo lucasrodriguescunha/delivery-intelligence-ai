@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 from sklearn.pipeline import Pipeline
 
-from modelo_atraso import (
+from ml.modelo_atraso import (
     FEATURES_CATEGORICAS,
     FEATURES_NUMERICAS,
     TARGET,
