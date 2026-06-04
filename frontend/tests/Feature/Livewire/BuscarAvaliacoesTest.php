@@ -63,6 +63,29 @@ test('buscar fails when n_resultados exceeds 20', function () {
         ->assertHasErrors(['n_resultados' => 'max']);
 });
 
+test('buscar fails when query exceeds 200 chars', function () {
+    Livewire::test(BuscarAvaliacoes::class)
+        ->set('query', str_repeat('a', 201))
+        ->call('buscar')
+        ->assertHasErrors(['query' => 'max']);
+});
+
+test('buscar fails when filtro_nota_minima is negative', function () {
+    Livewire::test(BuscarAvaliacoes::class)
+        ->set('query', 'atraso')
+        ->set('filtro_nota_minima', -0.5)
+        ->call('buscar')
+        ->assertHasErrors(['filtro_nota_minima' => 'min']);
+});
+
+test('buscar fails when filtro_nota_minima exceeds 5', function () {
+    Livewire::test(BuscarAvaliacoes::class)
+        ->set('query', 'atraso')
+        ->set('filtro_nota_minima', 5.5)
+        ->call('buscar')
+        ->assertHasErrors(['filtro_nota_minima' => 'max']);
+});
+
 // --- successful search ---
 
 test('buscar returns resultados and sets buscado true', function () {
