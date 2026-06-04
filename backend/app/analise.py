@@ -82,7 +82,7 @@ percentual_atraso_por_clima = (
 )
 
 for clima, percentual_atraso in percentual_atraso_por_clima.items():
-    print(f"  {clima:<15} {percentual_atraso:.1f}% atrasados")
+    print(f"{clima:<15} {percentual_atraso:.1f}% atrasados")
 
 
 print("\nTop 5 restaurantes por nota média:\n")
@@ -103,7 +103,7 @@ top_5_restaurantes_por_nota = (
 )
 
 for nome_restaurante, nota_media_restaurante in top_5_restaurantes_por_nota.items():
-    print(f"  {nome_restaurante:<35} {nota_media_restaurante:.2f}")
+    print(f"{nome_restaurante:<35} {nota_media_restaurante:.2f}")
 
 
 # Cria a pasta onde os gráficos serão salvos
@@ -128,8 +128,9 @@ ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha="right")
 plt.tight_layout()
 plt.savefig("graficos/pedidos_por_dia.png")
 plt.close()
+print()
 
-print("\nGráfico de pedidos por dia da semana gerado e salvo em: graficos/pedidos_por_dia_da_semana.png")
+print("Gráfico de pedidos por dia da semana gerado e salvo em: graficos/pedidos_por_dia_da_semana.png")
 
 
 # Gráfico 2: percentual de pedidos atrasados por clima
@@ -156,7 +157,7 @@ plt.tight_layout()
 plt.savefig("graficos/atraso_por_clima.png")
 plt.close()
 
-print("\nGráfico de atraso por clima gerado e salvo em: graficos/atraso_por_clima.png")
+print("Gráfico de atraso por clima gerado e salvo em: graficos/atraso_por_clima.png")
 
 
 # Gráfico 3: top 5 restaurantes por nota média
@@ -177,4 +178,5 @@ plt.tight_layout()
 plt.savefig("graficos/top5_restaurantes.png")
 plt.close()
 
-print("\nGráfico de top 5 restaurantes gerado e salvo em: graficos/top5_restaurantes.png")
+print("Gráfico de top 5 restaurantes gerado e salvo em: graficos/top5_restaurantes.png")
+print()

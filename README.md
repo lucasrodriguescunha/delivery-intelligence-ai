@@ -1,5 +1,14 @@
 # Delivery Intelligence AI Platform
 
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat&logo=fastapi&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.5+-F7931E?style=flat&logo=scikit-learn&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-3.0+-150458?style=flat&logo=pandas&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-412991?style=flat&logo=openai&logoColor=white)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-FF6B35?style=flat&logo=databricks&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-9.0+-0A9EDC?style=flat&logo=pytest&logoColor=white)
+
 Plataforma de inteligência operacional para restaurantes em ambiente de delivery. Combina machine learning para previsão de atrasos, busca semântica sobre avaliações de clientes e geração de insights via LLM.
 
 ## Arquitetura
