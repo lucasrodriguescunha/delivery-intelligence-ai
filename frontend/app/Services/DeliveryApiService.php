@@ -19,6 +19,11 @@ class DeliveryApiService
         return Http::get("{$this->base}/metricas")->throw()->json();
     }
 
+    public function defaults(): array
+    {
+        return Http::get("{$this->base}/defaults")->throw()->json();
+    }
+
     public function preverAtraso(array $dados): array
     {
         return Http::post("{$this->base}/prever-atraso", $dados)->throw()->json();

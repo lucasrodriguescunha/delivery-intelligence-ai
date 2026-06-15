@@ -26,6 +26,36 @@ def health():
     return {"status": "ok", "modelo_carregado": "pipeline" in estado}
 
 
+@router.get("/defaults")
+def defaults():
+    df = estado.get("df_pedidos")
+    if df is None:
+        raise HTTPException(status_code=503, detail="Dados não inicializados")
+
+    def _moda(col: str, fallback):
+        if col not in df.columns:
+            return fallback
+        s = df[col].dropna()
+        return s.mode().iloc[0] if not s.empty else fallback
+
+    def _mediana(col: str, fallback: float) -> float:
+        if col not in df.columns:
+            return fallback
+        s = df[col].dropna()
+        return float(round(s.median(), 2)) if not s.empty else fallback
+
+    return {
+        "valor_pedido": _mediana("valor_pedido", 45.0),
+        "quantidade_itens": int(_mediana("quantidade_itens", 3)),
+        "tempo_preparo_minutos": _mediana("tempo_preparo_minutos", 20.0),
+        "tempo_estimado_minutos": _mediana("tempo_estimado_minutos", 35.0),
+        "distancia_km": _mediana("distancia_km", 3.0),
+        "hora": int(_mediana("hora", 19)),
+        "clima": str(_moda("clima", "Sol")),
+        "dia_semana": str(_moda("dia_semana", "Sexta")),
+    }
+
+
 @router.get("/metricas")
 def metricas():
     df_pedidos = estado.get("df_pedidos")
