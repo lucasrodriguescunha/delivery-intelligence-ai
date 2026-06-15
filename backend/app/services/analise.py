@@ -196,7 +196,7 @@ tempo_medio_por_dia.plot(
     marker="o",
 )
 
-ax.fill_between(ax.get_xticks(), tempo_medio_por_dia.values, alpha=0.1, color="darkorange")
+ax.fill_between(range(len(tempo_medio_por_dia)), tempo_medio_por_dia.values, alpha=0.1, color="darkorange")
 ax.set_title("Tempo médio de entrega por dia (min)")
 ax.set_xlabel("Dia")
 ax.set_ylabel("Minutos")
